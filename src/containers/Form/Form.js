@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { addIdea } from '../../actions';
+import { connect } from 'react-redux';
 
 export class Form extends Component {
 	constructor() {
@@ -32,11 +34,15 @@ export class Form extends Component {
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+				<input type="text" name="title" value={this.state.title} onChange={this.handleChange} /> {' '}
 				<input type="text" name="body" value={this.state.body} onChange={this.handleChange} /> <button> Submit </button>
 			</form>
 		);
 	}
 }
 
-export default Form;
+const mapDispatchToProps = dispatch => ({
+	addIdea: newIdea => dispatch(addIdea(newIdea))
+});
+
+export default connect(null, mapDispatchToProps)(Form);
